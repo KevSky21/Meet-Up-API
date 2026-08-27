@@ -14,6 +14,6 @@ class Event(Base):
     description = Column(String, nullable=True)
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.user_id"), nullable=False)
     location = Column(String, nullable=True)
-    createdAt = Column(DateTime, default=func.now())
+    created_at = Column(DateTime, default=func.now())
     #User doesn't have to have a limit. Should say no limit if not included
     maxParty = Column(Integer, nullable=True)

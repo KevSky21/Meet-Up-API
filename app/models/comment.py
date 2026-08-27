@@ -12,4 +12,4 @@ class Comment(Base):
     event_id = Column(UUID(as_uuid=True), ForeignKey("events.event_id"),nullable=False)
     content = Column(String, nullable=False)
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.user_id"),nullable=False)
-    createdAt = Column(DateTime, default=func.now())
+    created_at = Column(DateTime, default=func.now())

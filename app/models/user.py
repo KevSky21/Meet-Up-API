@@ -13,5 +13,5 @@ class User(Base):
     password = Column(String,nullable=False)
     birth = Column(Date)
     phone_num = Column(String, nullable=True)
-    createdAt = Column(DateTime,default=func.now())
+    created_at = Column(DateTime,default=func.now())
 

@@ -1,8 +1,8 @@
 """create initial tables
 
-Revision ID: 06dec4b2860e
+Revision ID: 00ded4f44d69
 Revises: 
-Create Date: 2026-08-23 16:51:38.728372
+Create Date: 2026-08-26 12:47:51.276344
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '06dec4b2860e'
+revision: str = '00ded4f44d69'
 down_revision: Union[str, Sequence[str], None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -28,7 +28,7 @@ def upgrade() -> None:
     sa.Column('password', sa.String(), nullable=False),
     sa.Column('birth', sa.Date(), nullable=True),
     sa.Column('phone_num', sa.String(), nullable=True),
-    sa.Column('createdAt', sa.DateTime(), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('user_id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
@@ -40,7 +40,7 @@ def upgrade() -> None:
     sa.Column('description', sa.String(), nullable=True),
     sa.Column('user_id', sa.UUID(), nullable=False),
     sa.Column('location', sa.String(), nullable=True),
-    sa.Column('createdAt', sa.DateTime(), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('maxParty', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.user_id'], ),
     sa.PrimaryKeyConstraint('event_id')
@@ -50,7 +50,7 @@ def upgrade() -> None:
     sa.Column('event_id', sa.UUID(), nullable=False),
     sa.Column('content', sa.String(), nullable=False),
     sa.Column('user_id', sa.UUID(), nullable=False),
-    sa.Column('createdAt', sa.DateTime(), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['event_id'], ['events.event_id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.user_id'], ),
     sa.PrimaryKeyConstraint('comment_id')
@@ -73,4 +73,5 @@ def downgrade() -> None:
     op.drop_table('comments')
     op.drop_table('events')
     op.drop_table('users')
+    op.execute('DROP TYPE IF EXISTS rsvpstatus')
     # ### end Alembic commands ###
